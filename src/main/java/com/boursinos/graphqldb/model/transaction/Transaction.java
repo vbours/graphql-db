@@ -27,8 +27,8 @@ public class Transaction {
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "crypto_id")
-    private String transaction_id;
+    @Column(name = "transaction_id")
+    private String transactionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "client_id")
@@ -43,7 +43,7 @@ public class Transaction {
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    private Date created_at;
+    private Date createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "crypto_id", referencedColumnName = "crypto_id")
