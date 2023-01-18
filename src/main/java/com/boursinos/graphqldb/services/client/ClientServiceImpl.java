@@ -2,6 +2,9 @@ package com.boursinos.graphqldb.services.client;
 
 import com.boursinos.graphqldb.model.client.Client;
 import com.boursinos.graphqldb.repositories.client.ClientRepository;
+import io.leangen.graphql.annotations.GraphQLMutation;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@GraphQLApi
 @Service
 public class ClientServiceImpl implements ClientService {
 
@@ -22,11 +26,13 @@ public class ClientServiceImpl implements ClientService {
        return clientRepository.findAll();
     }
 
+    @GraphQLQuery
     @Override
     public List<Client> getAllClients(int count) {
         return this.clientRepository.findAll().stream().limit(count).collect(Collectors.toList());
     }
 
+    @GraphQLQuery
     @Override
     public Optional<Client> getClient(String id){
         return clientRepository.findById(id);
@@ -35,6 +41,16 @@ public class ClientServiceImpl implements ClientService {
     @Transactional
     public String saveClient(Client client){
         return clientRepository.saveClient(client);
+    }
+
+    @GraphQLMutation
+    public Client createClient(String firstname, String lastname) {
+        Client client = new Client();
+        client.setFirstname(firstname);
+        client.setLastname(lastname);
+        String clientId = clientRepository.saveClient(client);
+        client.setClientId(clientId);
+        return client;
     }
 
     @Override
@@ -51,16 +67,5 @@ public class ClientServiceImpl implements ClientService {
         clientRepository.save(client);
         return client;
     }
-
-    @Override
-    public Client createClient(String firstname, String lastname) {
-        final Client client = new Client();
-        client.setFirstname(firstname);
-        client.setLastname(lastname);
-        client.setCreatedAt(new Date());
-        client.setUpdatedAt(new Date());
-        return this.clientRepository.save(client);
-    }
-
 
 }
