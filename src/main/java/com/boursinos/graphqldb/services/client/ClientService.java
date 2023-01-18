@@ -15,9 +15,9 @@ public interface ClientService {
 
     String saveClient(Client client);
 
-    void deleteClient(String id);
+    Optional<Client> deleteClient(String id);
 
-    Client updateClient(String id, Client client);
+    Client updateClient(String id, String firstname, String lastname);
 
     Client createClient(final String firstname, final String lastname);
 

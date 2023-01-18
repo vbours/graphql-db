@@ -22,8 +22,8 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository clientRepository;
 
     @Override
-    public List<Client> getAllClients(){
-       return clientRepository.findAll();
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
     }
 
     @GraphQLQuery
@@ -34,33 +34,36 @@ public class ClientServiceImpl implements ClientService {
 
     @GraphQLQuery
     @Override
-    public Optional<Client> getClient(String id){
+    public Optional<Client> getClient(String id) {
         return clientRepository.findById(id);
     }
 
     @Transactional
-    public String saveClient(Client client){
+    public String saveClient(Client client) {
         return clientRepository.saveClient(client);
     }
 
     @GraphQLMutation
+    @Override
     public Client createClient(String firstname, String lastname) {
-        Client client = new Client();
-        client.setFirstname(firstname);
-        client.setLastname(lastname);
+        Client client = new Client(firstname, lastname);
         String clientId = clientRepository.saveClient(client);
         client.setClientId(clientId);
         return client;
     }
 
+    @GraphQLMutation
     @Override
-    public void deleteClient(String id){
+    public Optional<Client> deleteClient(String id) {
         clientRepository.deleteById(id);
+        return getClient(id);
     }
 
+    @GraphQLMutation
     @Override
-    public Client updateClient(String id, Client client){
+    public Client updateClient(String id, String firstname, String lastname) {
         Client oldClient = clientRepository.getById(id);
+        Client client = new Client(firstname, lastname);
         client.setClientId(id);
         client.setUpdatedAt(new Date());
         client.setCreatedAt(oldClient.getCreatedAt());
