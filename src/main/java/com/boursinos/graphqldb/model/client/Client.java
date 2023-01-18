@@ -43,4 +43,9 @@ public class Client {
     @LastModifiedDate
     private Date updatedAt;
 
+
+    public Client(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
 }
