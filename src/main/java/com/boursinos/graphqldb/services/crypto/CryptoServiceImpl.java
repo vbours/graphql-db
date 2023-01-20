@@ -47,8 +47,8 @@ public class CryptoServiceImpl implements CryptoService {
     @Override
     public Crypto createCrypto(String name, double value) {
         Crypto crypto = new Crypto(name, value);
-        String clientId = cryptoRepository.saveCrypto(crypto);
-        crypto.setCryptoId(clientId);
+        String cryptoId = cryptoRepository.saveCrypto(crypto);
+        crypto.setCryptoId(cryptoId);
         return crypto;
     }
 

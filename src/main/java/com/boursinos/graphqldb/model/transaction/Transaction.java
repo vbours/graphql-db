@@ -56,4 +56,12 @@ public class Transaction {
 
     @Column
     private double totalValue;
+
+    public Transaction(Client client, TradeType tradeType, Crypto crypto, double amount, double totalValue) {
+        this.client = client;
+        this.tradeType = tradeType;
+        this.crypto = crypto;
+        this.amount = amount;
+        this.totalValue = totalValue;
+    }
 }
