@@ -1,0 +1,22 @@
+version: "2.4"
+services:
+  postgres:
+    container_name: ${APP_NAME}-postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5434:5432"
+    restart: unless-stopped
+    networks:
+      - graphql-network
+
+volumes:
+  postgres:
+
+networks:
+  graphql-network:
