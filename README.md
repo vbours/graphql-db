@@ -1,4 +1,4 @@
-# hr-platform
+# graphql-db project
 
 ### Technologies ###
 
