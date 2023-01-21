@@ -21,6 +21,7 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
+    @GraphQLQuery(name = "allClientsQuery")
     @Override
     public List<Client> getAllClients() {
         return clientRepository.findAll();
