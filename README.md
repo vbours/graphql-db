@@ -145,10 +145,10 @@ mutation {
 query {
   allClients(count: 100) 
   {	
-	clientId,
-    firstname,
-    lastname
-	}
+        clientId,
+        firstname,
+        lastname
+  }
 }
 ```
 
@@ -156,13 +156,13 @@ query {
 
 ```
 query {
-  allCryptos(count: 100) 
-  {	
-	cryptoId,
-    name,
-    value,
-    createdAt
-	}
+    allCryptos(count: 100) 
+    {	
+        cryptoId,
+        name,
+        value,
+        createdAt
+    }
 }
 ```
 
@@ -174,17 +174,17 @@ query {
   allTransactions(count: 100) 
   {	
 	transactionId,
-    amount
-  	client{
-      clientId,
-      firstname,
-      lastname
-  	}
-    crypto{
-      cryptoId,
-      name
+        amount,
+        client{
+              clientId,
+              firstname,
+              lastname
+        }
+        crypto{
+              cryptoId,
+              name
+        }
     }
-  }
 }
 ```
 
